@@ -21,10 +21,10 @@ const Footer = () => {
             
                 <div className="col-md-3 mx-auto mb-4" style={{paddingTop: "60px",  color:"green"}}>
                 
-                <p><Link to="/!">Privacy and Refund policy</Link></p>
-                <p><Link to="/!">Disclamer Policy</Link></p>
-                <p><Link to="/!">Terms and Condition</Link></p>
-                <p><Link to="/!">Click here for quick customer support</Link></p>
+                <p><Link to="/!" style={{color:"green"}}>Privacy and Refund policy</Link></p>
+                <p><Link to="/!" style={{color:"green"}}>Disclamer Policy</Link></p>
+                <p><Link to="/!" style={{color:"green"}}>Terms and Condition</Link></p>
+                <p><Link to="/!" style={{color:"green"}}>Click here for quick customer support</Link></p>
                 </div>
             
             </div>
