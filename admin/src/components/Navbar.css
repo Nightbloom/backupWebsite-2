@@ -61,7 +61,7 @@
     /* toggle btn */
     .toggle-btn{
         position: absolute;
-        width: 35px;
+        width: 30px;
         height: 40px;
         right: 2vh;
         cursor: pointer;

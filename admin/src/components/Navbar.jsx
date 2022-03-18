@@ -11,11 +11,9 @@ export default function Navbar() {
 
         const toggleBtn = document.querySelector('.toggle-btn');
         const linkContainer = document.querySelector('.links-container');
-        
-        toggleBtn.addEventListener('click', () => {
-            toggleBtn.classList.toggle('active');
-            linkContainer.classList.toggle('show');
-        })
+        toggleBtn.classList.toggle('active');
+        linkContainer.classList.toggle('show');
+    
     }
     
 
