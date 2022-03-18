@@ -86,7 +86,7 @@ export const Home = () => {
         </p>
       </div>
       <div>
-        <Link to="/product" className="orderBtn">
+        <Link to="/products" className="orderBtn">
           Next
         </Link>
       </div>
