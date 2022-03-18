@@ -16,7 +16,7 @@ export const Home = () => {
   return (
     <div className="conatainer">
       <div className="header">
-        <div className="zangHeading">Zang It</div>
+        <pre className="zangHeading">Zang  It</pre>
       </div>
       <div className="maskgroup">
         <div className="maskgroup1">

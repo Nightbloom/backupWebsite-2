@@ -1,4 +1,5 @@
 .header {
+    
     position: absolute;
     top: 0;
     background: linear-gradient(
@@ -51,7 +52,7 @@
   }
   .maskgroup3 {
     position: absolute;
-    left: 60%;
+    left: 63%;
     top: 10%;
   }
   .maskgroup3 img{
@@ -92,10 +93,11 @@
       height: 8vw;
   }
 
-  /* .welcome {
-    width: 100%;
-    margin-top: 45%;
-  } */
+  .welcome {
+    /* width: 100%;
+    margin-top: 45%; */
+    padding-top: 5vw;
+  }
   .sub_heading {
     font-family: Expletus Sans;
     font-weight: bolder;
@@ -164,7 +166,7 @@
     background-color: black;
   }
   .wicon img {
-    padding: 15px;
+    padding: 5px;
     max-height: 100%;
   }
   .footer {
