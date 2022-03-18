@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllProductAction } from "../actions/product-action";
 import ProductCard from "./../components/ProductCard";
 
-export default function Home() {
+export default function Products() {
   const dispatch = useDispatch();
   const { reduxProduct, isLoading } = useSelector((state) => state.product);
   useEffect(() => {
