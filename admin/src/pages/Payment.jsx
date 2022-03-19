@@ -1,107 +1,123 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-const loadScript = (src) => {
-	return new Promise((resolve) => {
-		const script = document.createElement('script')
-		script.src = src
-		script.onload = () => {
-			resolve(true)
-		}
-		script.onerror = () => {
-			resolve(false)
-		}
-		document.body.appendChild(script)
-	})
-}
+function Payment() {
+  const [loading, setLoading] = useState(false);
+  const [orderAmount, setOrderAmount] = useState(0);
+  const [orders, setOrders] = useState([]);
 
-const __DEV__ = document.domain === 'localhost'
+  async function fetchOrders() {
+    const { data } = await axios.get('/payment/list-orders');
+    setOrders(data);
+  }
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
+  const loadRazorpay = () => {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onerror = () => {
+      alert('Razorpay SDK failed to load. Are you online?');
+    };
+    script.onload = async () => {
+      try {
+        setLoading(true);
+        const result = await axios.post('/payment/create-order', {
+          amount: orderAmount + '00',
+        });
+        const { amount, id: order_id, currency } = result.data;
+        const {
+          data: { key: razorpayKey },
+        } = await axios.get('/payment/get-razorpay-key');
 
+        const options = {
+          key: razorpayKey,
+          amount: amount.toString(),
+          currency: currency,
+          name: 'example name',
+          description: 'example transaction',
+          order_id: order_id,
+          handler: async function (response) {
+            const result = await axios.post('/payment/pay-order', {
+              amount: amount,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+            });
+            alert(result.data.msg);
+            fetchOrders();
+          },
+          prefill: {
+            name: 'example name',
+            email: 'email@example.com',
+            contact: '111111',
+          },
+          notes: {
+            address: 'example address',
+          },
+          theme: {
+            color: '#80c0f0',
+          },
+        };
 
-
-const Payment = () => {
-
-	const [name, setName] = useState('Mehul')
-
-	async function displayRazorpay() {
-		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
-
-		if (!res) {
-			alert('Razorpay SDK failed to load. Are you online?')
-			return
-		}
-
-		const data = await fetch('http://localhost:1337/razorpay', { method: 'POST' }).then((t) =>
-			t.json()
-		)
-
-		console.log(data)
-
-		const options = {
-			key: __DEV__ ? 'rzp_test_uGoq5ABJztRAhk' : 'PRODUCTION_KEY',
-			currency: data.currency,
-			amount: data.amount.toString(),
-			order_id: data.id,
-			name: 'Donation',
-			description: 'Thank you for nothing. Please give us some money',
-			image: 'http://localhost:1337/logo.svg',
-			handler: function (response) {
-				alert(response.razorpay_payment_id)
-				alert(response.razorpay_order_id)
-				alert(response.razorpay_signature)
-			},
-			prefill: {
-				name,
-				email: 'sdfdsjfh2@ndsfdf.com',
-				phone_number: '9899999999'
-			}
-		}
-		const paymentObject = new window.Razorpay(options)
-		paymentObject.open()
-	}
-
-
+        setLoading(false);
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      } catch (err) {
+        alert(err);
+        setLoading(false);
+      }
+    };
+    document.body.appendChild(script);
+  }
 
   return (
-    <div>
-        <hr/>
-         
-        <br/>
-            <br/>
-            <br/>
-            <label>Amount    :</label><input type="text" id="order-amt" /><br/>
+    <div className="App">
+      <h1> Razorpay Example: Node & React</h1>
+      <hr />
+      <div>
+        <h2> Pay Order</h2>
+        <label>
+          Amount:{' '}
+          <input
+            placeholder="INR"
+            type="number"
+            value={orderAmount}
+            onChange={(e) => setOrderAmount(e.target.value)}
+          ></input>
+        </label>
 
-            <button id="order-button1" onClick={Order}>Get Order id from server</button> <br/>
-            <button id="order-button1" onClick={displayRazorpay}>Get Razorpay</button> <br/>
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <hr/>
-
-            <label>Order id   :</label><input type="text" id="rzp-text" /><br/>
-            <button id="rzp-button1" onClick={Checkout}>CHeckout</button>
-            <div id="paymentDetails"></div>
-        
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <hr/>
-
-
-            <label>Order id    :</label><input type="text" id="order-id" />
-            <br/>
-            <label>payment id  :</label><input type="text" id="order-pay-id" />
-            <br/>
-            <label>Signature   :</label><input type="text" id="order-sig" />
-
-            <br/>
-            <label>Verify Signature</label><button id="verify-button1" onClick={Verfiy}>Verify</button>
-         
+        <button disabled={loading} onClick={loadRazorpay}>
+          Razorpay
+        </button>
+        {loading && <div>Loading...</div>}
+      </div>
+      <div className="list-orders">
+        <h2>List Orders</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>AMOUNT</th>
+              <th>ISPAID</th>
+              <th>RAZORPAY</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((x) => (
+              <tr key={x._id}>
+                <td>{x._id}</td>
+                <td>{x.amount / 100}</td>
+                <td>{x.isPaid ? 'YES' : 'NO'}</td>
+                <td>{x.razorpay.paymentId}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Payment
+export default Payment;
