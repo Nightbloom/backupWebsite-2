@@ -14,7 +14,7 @@ const Cart = ({ location, match }) => {
     const [item] = cartItem
 
     return (
-        <div className='container'>
+        <div className='container' style={{marginTop:"15vw"}}>
         {
             cartItem.length > 0
             ?

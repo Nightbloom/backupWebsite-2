@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Checkout = () => {
   return (
     
-    <div className="container my-4">
+    <div className="container" style={{marginTop: "20vw"}}>
         <h1>Customer info</h1>
         <form>    
         <div className="mb-3">

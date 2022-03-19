@@ -73,7 +73,7 @@ function Payment() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{marginTop:"15vw"}}>
       <h1> Razorpay Example: Node & React</h1>
       <hr />
       <div>
