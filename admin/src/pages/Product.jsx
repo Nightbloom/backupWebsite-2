@@ -13,7 +13,7 @@ export default function Product({ match, history }) {
     const url = `/cart/${reduxSingleProduct._id}?quantity=${qty}`
     history.push(url)
   }
-  return <div className='container'>
+  return <div className='container' style={{marginTop:"15vw"}}>
     <div className="row">
       <div className="col-lg-6">
         {/* {match.params.id} */}
