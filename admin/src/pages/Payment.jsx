@@ -7,7 +7,7 @@ function Payment() {
   const [orders, setOrders] = useState([]);
 
   async function fetchOrders() {
-    const { data } = await axios.get('/payment/list-orders');
+    const { data } = await axios.get('/list-orders');
     setOrders(data);
   }
   useEffect(() => {
@@ -23,13 +23,13 @@ function Payment() {
     script.onload = async () => {
       try {
         setLoading(true);
-        const result = await axios.post('/payment/create-order', {
+        const result = await axios.post('create-order', {
           amount: orderAmount + '00',
         });
         const { amount, id: order_id, currency } = result.data;
         const {
           data: { key: razorpayKey },
-        } = await axios.get('/payment/get-razorpay-key');
+        } = await axios.get('/get-razorpay-key');
 
         const options = {
           key: razorpayKey,
@@ -39,7 +39,7 @@ function Payment() {
           description: 'example transaction',
           order_id: order_id,
           handler: async function (response) {
-            const result = await axios.post('/payment/pay-order', {
+            const result = await axios.post('/pay-order', {
               amount: amount,
               razorpayPaymentId: response.razorpay_payment_id,
               razorpayOrderId: response.razorpay_order_id,

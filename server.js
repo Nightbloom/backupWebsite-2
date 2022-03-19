@@ -8,6 +8,7 @@ const PORT = process.env.PORT
 const db = require('./config/db');
 const product = require('./routers/product-router')
 const user = require("./routers/user-router")
+const Razorpay = require('razorpay');
 
 
 db()
@@ -18,7 +19,12 @@ app.use(express.json({ extended: false }))
 app.use("/api/products", product)
 app.use("/api/user", user)
 
-const Razorpay = require('razorpay');
+// This is were the checkout/payment starts
+
+mongoose.connect(process.env.MONGO_URL).then(() => {
+    console.log('mongodb connected');
+  });
+  
 
 
 const OrderSchema = mongoose.Schema({
@@ -82,6 +88,6 @@ app.get('/list-orders', async (req, res) => {
   res.send(orders);
 });
 
-
+//ends 
 
 app.listen(PORT || 5000, () => console.log(`http://localhost:${PORT || 5000}`))
