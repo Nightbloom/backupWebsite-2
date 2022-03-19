@@ -1,33 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Order = () => {
-
-    
-        var url = '/api/payment/order';
-        var params = {
-            amount: document.getElementById('order-amt').value,  
-            currency: "INR",
-            receipt: "su001",
-            payment_capture: '1'
-        };
-        
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function (res) {
-            if (xmlHttp.readyState === 4) {
-                res=JSON.parse(xmlHttp.responseText);
-                document.getElementById('rzp-text').value=res.sub.id;
-            }
-        }
-        xmlHttp.open("POST", url, true); // false for synchronous request
-        xmlHttp.setRequestHeader("Content-type", "application/json");
-        xmlHttp.send(JSON.stringify(params));
-    
-
-}
-
-
-const Loader = (src) => {
-    return new Promise((resolve) => {
+const loadScript = (src) => {
+	return new Promise((resolve) => {
 		const script = document.createElement('script')
 		script.src = src
 		script.onload = () => {
@@ -40,72 +14,65 @@ const Loader = (src) => {
 	})
 }
 
+const __DEV__ = document.domain === 'localhost'
 
 
-const Checkout = async (e)  => { 
-    
-    
-    const script = await Loader('https://checkout.razorpay.com/v1/checkout.js')
-    
-    if (script) {
-        alert('Razorpay SDK failed to load. Are you online?')
-        return
-    }
-
-     var options = {
-         "key": "rzp_test_9I8gTyiGHoVj8K",  //Enter your razorpay key
-         "currency": "INR",
-         "name": "Razor Tutorial",
-         "description": "Razor Test Transaction",
-         "image": "https://previews.123rf.com/images/subhanbaghirov/subhanbaghirov1605/subhanbaghirov160500087/56875269-vector-light-bulb-icon-with-concept-of-idea-brainstorming-idea-illustration-.jpg",
-         "order_id": document.getElementById('rzp-text').value,
-         "handler": function (response){
-             document.getElementById('order-pay-id').value=response.razorpay_payment_id;
-             document.getElementById('order-id').value=response.razorpay_order_id;
-             document.getElementById('order-sig').value=response.razorpay_signature;
-            },
-            "theme": {
-                "color": "#227254"
-            }
-        };
-        var rzp1 = new window.Razorpay(options);
-        rzp1.open();
-        // e.preventDefault();
-        
-
-}
-
-const Verfiy = () => {
-    
-    var url = '/api/payment/verify';
-    var params = {
-        razorpay_order_id:  document.getElementById('order-id').value,  
-        razorpay_payment_id:  document.getElementById('order-pay-id').value,
-        razorpay_signature:  document.getElementById('order-sig').value
-    };
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function (res) {
-        if (xmlHttp.readyState === 4) {
-            alert(xmlHttp.responseText);
-    }
-    }
-    xmlHttp.open("POST", url, true); // false for synchronous request
-    xmlHttp.setRequestHeader("Content-type", "application/json");
-    xmlHttp.send(JSON.stringify(params));
-}
 
 
 const Payment = () => {
+
+	const [name, setName] = useState('Mehul')
+
+	async function displayRazorpay() {
+		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+		if (!res) {
+			alert('Razorpay SDK failed to load. Are you online?')
+			return
+		}
+
+		const data = await fetch('http://localhost:1337/razorpay', { method: 'POST' }).then((t) =>
+			t.json()
+		)
+
+		console.log(data)
+
+		const options = {
+			key: __DEV__ ? 'rzp_test_uGoq5ABJztRAhk' : 'PRODUCTION_KEY',
+			currency: data.currency,
+			amount: data.amount.toString(),
+			order_id: data.id,
+			name: 'Donation',
+			description: 'Thank you for nothing. Please give us some money',
+			image: 'http://localhost:1337/logo.svg',
+			handler: function (response) {
+				alert(response.razorpay_payment_id)
+				alert(response.razorpay_order_id)
+				alert(response.razorpay_signature)
+			},
+			prefill: {
+				name,
+				email: 'sdfdsjfh2@ndsfdf.com',
+				phone_number: '9899999999'
+			}
+		}
+		const paymentObject = new window.Razorpay(options)
+		paymentObject.open()
+	}
+
+
+
   return (
     <div>
         <hr/>
-         
          
         <br/>
             <br/>
             <br/>
             <label>Amount    :</label><input type="text" id="order-amt" /><br/>
+
             <button id="order-button1" onClick={Order}>Get Order id from server</button> <br/>
+            <button id="order-button1" onClick={displayRazorpay}>Get Razorpay</button> <br/>
 
             <br/>
             <br/>
@@ -124,14 +91,14 @@ const Payment = () => {
             <hr/>
 
 
-        <label>Order id    :</label><input type="text" id="order-id" />
-        <br/>
-        <label>payment id  :</label><input type="text" id="order-pay-id" />
-        <br/>
-        <label>Signature   :</label><input type="text" id="order-sig" />
+            <label>Order id    :</label><input type="text" id="order-id" />
+            <br/>
+            <label>payment id  :</label><input type="text" id="order-pay-id" />
+            <br/>
+            <label>Signature   :</label><input type="text" id="order-sig" />
 
-        <br/>
-        <label>Verify Signature</label><button id="verify-button1" onClick={Verfiy}>Verify</button>
+            <br/>
+            <label>Verify Signature</label><button id="verify-button1" onClick={Verfiy}>Verify</button>
          
     </div>
   )
