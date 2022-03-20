@@ -9,8 +9,10 @@ import Laddoo from "../images/Laddoo Pic 2.png"
 import combo from "../images/combo 1.png"
 import time from "../images/time.png"
 import Serves from "../images/Serving.png"
+import Modal from "../components/combo1/combo1"
 
 const TestProducts = () => {
+    const [showModal, setShowModal] = useState(false);
     const [qty1, setQty1] = useState(0);
     const [qty2, setQty2] = useState(0);
     const [qty3, setQty3] = useState(0);
@@ -21,6 +23,26 @@ const TestProducts = () => {
     const [qty8, setQty8] = useState(0);
     const dispatch = useDispatch()
     const { reduxSingleProduct, isLoading } = useSelector((state) => state.singleProduct)
+    const openModal = () => {
+        setShowModal(true);
+      };
+    
+    const amount1 = 389
+    const amount2 = 199
+    const amount3 = 159
+    const amount4 = 299
+    const amount5 = 259
+    const amount6 = 456
+    const a = amount1 * qty1
+    const b = amount2 * qty2
+    const c = amount3 * qty3
+    const d = amount4 * qty4
+    const e = amount5 * qty5
+    const f = amount6 * qty6
+    const total = a + b + c + d + e + f
+
+
+
   return (
     <>
     <section style={{marginTop: "20vw"}}>
@@ -61,6 +83,8 @@ const TestProducts = () => {
             </div>
         </div>
         <p><i class="arrow down"></i></p>
+        {/* <button onClick={openModal}>Open Modal</button>
+        {showModal ? <Modal setShowModal={setShowModal} /> : null} */}
         <hr />
         <div className='main'  >
             <div className='imageContainer'>
@@ -98,6 +122,7 @@ const TestProducts = () => {
                 </div>
             </div>
         </div>
+
         <p><i class="arrow down"></i></p>
         <hr />
         <div className='main'  >
@@ -328,6 +353,7 @@ const TestProducts = () => {
         </div>
         <p><i class="arrow down"></i></p>
         <hr />
+        <button className="orderBtn">Pay Rs. {total}</button>
     </section>
     </>
   )
