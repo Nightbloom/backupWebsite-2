@@ -7,6 +7,7 @@ import Products from "./pages/Products";
 import Footer from "./components/Footer";
 import { Home } from "./components/Home";
 import Payment from "./pages/Payment";
+import TestProcuts from "./pages/TestProducts"
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <Route path="/cart/:id?" component={Cart} />
       <Route path="/checkout/:id?" component={Checkout} />
       <Route path="/payment" component={Payment} />
+      <Route path="/test" component={TestProcuts} />
+
       <Footer/>
     </BrowserRouter>
   );
