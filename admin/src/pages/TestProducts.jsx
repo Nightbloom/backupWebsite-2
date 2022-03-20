@@ -11,7 +11,14 @@ import time from "../images/time.png"
 import Serves from "../images/Serving.png"
 
 const TestProducts = () => {
-    const [qty, setQty] = useState(0);
+    const [qty1, setQty1] = useState(0);
+    const [qty2, setQty2] = useState(0);
+    const [qty3, setQty3] = useState(0);
+    const [qty4, setQty4] = useState(0);
+    const [qty5, setQty5] = useState(0);
+    const [qty6, setQty6] = useState(0);
+    const [qty7, setQty7] = useState(0);
+    const [qty8, setQty8] = useState(0);
     const dispatch = useDispatch()
     const { reduxSingleProduct, isLoading } = useSelector((state) => state.singleProduct)
   return (
@@ -43,12 +50,12 @@ const TestProducts = () => {
                 Quantity
                 </div>
                 <div className='quantity-button'>
-                <button className="btn" disabled={qty === 0 ? true : false} onClick={e => {
-                    setQty(pre => pre === 0 ? 1 : pre - 1)
+                <button className="btn" disabled={qty1 === 0 ? true : false} onClick={e => {
+                    setQty1(pre => pre === 0 ? 1 : pre - 1)
                   }}>-</button>
-                  <strong style={{}}>&nbsp;&nbsp; {qty} &nbsp;&nbsp;</strong>
-                  <button className="btn" disabled={reduxSingleProduct.serves === qty ? true : false} onClick={e => {
-                    setQty(pre => pre + 1)
+                  <strong style={{}}>&nbsp;&nbsp; {qty1} &nbsp;&nbsp;</strong>
+                  <button className="btn" disabled={reduxSingleProduct.serves === qty1 ? true : false} onClick={e => {
+                    setQty1(pre => pre + 1)
                   }}>+</button>
                 </div>
             </div>
@@ -81,12 +88,12 @@ const TestProducts = () => {
                 Quantity
                 </div>
                 <div className='quantity-button'>
-                <button className="btn" disabled={qty === 0 ? true : false} onClick={e => {
-                    setQty(pre => pre === 0 ? 1 : pre - 1)
+                <button className="btn" disabled={qty2 === 0 ? true : false} onClick={e => {
+                    setQty2(pre => pre === 0 ? 1 : pre - 1)
                   }}>-</button>
-                  <strong style={{}}>&nbsp;&nbsp; {qty} &nbsp;&nbsp;</strong>
-                  <button className="btn" disabled={reduxSingleProduct.serves === qty ? true : false} onClick={e => {
-                    setQty(pre => pre + 1)
+                  <strong style={{}}>&nbsp;&nbsp; {qty2} &nbsp;&nbsp;</strong>
+                  <button className="btn" disabled={reduxSingleProduct.serves === qty2 ? true : false} onClick={e => {
+                    setQty2(pre => pre + 1)
                   }}>+</button>
                 </div>
             </div>
@@ -119,12 +126,12 @@ const TestProducts = () => {
                 Quantity
                 </div>
                 <div className='quantity-button'>
-                <button className="btn" disabled={qty === 0 ? true : false} onClick={e => {
-                    setQty(pre => pre === 0 ? 1 : pre - 1)
+                <button className="btn" disabled={qty3 === 0 ? true : false} onClick={e => {
+                    setQty3(pre => pre === 0 ? 1 : pre - 1)
                   }}>-</button>
-                  <strong style={{}}>&nbsp;&nbsp; {qty} &nbsp;&nbsp;</strong>
-                  <button className="btn" disabled={reduxSingleProduct.serves === qty ? true : false} onClick={e => {
-                    setQty(pre => pre + 1)
+                  <strong style={{}}>&nbsp;&nbsp; {qty3} &nbsp;&nbsp;</strong>
+                  <button className="btn" disabled={reduxSingleProduct.serves === qty3 ? true : false} onClick={e => {
+                    setQty3(pre => pre + 1)
                   }}>+</button>
                 </div>
             </div>
@@ -157,12 +164,12 @@ const TestProducts = () => {
                 Quantity
                 </div>
                 <div className='quantity-button'>
-                <button className="btn" disabled={qty === 0 ? true : false} onClick={e => {
-                    setQty(pre => pre === 0 ? 1 : pre - 1)
+                <button className="btn" disabled={qty4 === 0 ? true : false} onClick={e => {
+                    setQty4(pre => pre === 0 ? 1 : pre - 1)
                   }}>-</button>
-                  <strong style={{}}>&nbsp;&nbsp; {qty} &nbsp;&nbsp;</strong>
-                  <button className="btn" disabled={reduxSingleProduct.serves === qty ? true : false} onClick={e => {
-                    setQty(pre => pre + 1)
+                  <strong style={{}}>&nbsp;&nbsp; {qty4} &nbsp;&nbsp;</strong>
+                  <button className="btn" disabled={reduxSingleProduct.serves === qty4 ? true : false} onClick={e => {
+                    setQty4(pre => pre + 1)
                   }}>+</button>
                 </div>
             </div>
@@ -195,12 +202,12 @@ const TestProducts = () => {
                 Quantity
                 </div>
                 <div className='quantity-button'>
-                <button className="btn" disabled={qty === 0 ? true : false} onClick={e => {
-                    setQty(pre => pre === 0 ? 1 : pre - 1)
+                <button className="btn" disabled={qty5 === 0 ? true : false} onClick={e => {
+                    setQty5(pre => pre === 0 ? 1 : pre - 1)
                   }}>-</button>
-                  <strong style={{}}>&nbsp;&nbsp; {qty} &nbsp;&nbsp;</strong>
-                  <button className="btn" disabled={reduxSingleProduct.serves === qty ? true : false} onClick={e => {
-                    setQty(pre => pre + 1)
+                  <strong style={{}}>&nbsp;&nbsp; {qty5} &nbsp;&nbsp;</strong>
+                  <button className="btn" disabled={reduxSingleProduct.serves === qty5 ? true : false} onClick={e => {
+                    setQty5(pre => pre + 1)
                   }}>+</button>
                 </div>
             </div>
@@ -233,12 +240,12 @@ const TestProducts = () => {
                 Quantity
                 </div>
                 <div className='quantity-button'>
-                <button className="btn" disabled={qty === 0 ? true : false} onClick={e => {
-                    setQty(pre => pre === 0 ? 1 : pre - 1)
+                <button className="btn" disabled={qty6 === 0 ? true : false} onClick={e => {
+                    setQty6(pre => pre === 0 ? 1 : pre - 1)
                   }}>-</button>
-                  <strong style={{}}>&nbsp;&nbsp; {qty} &nbsp;&nbsp;</strong>
-                  <button className="btn" disabled={reduxSingleProduct.serves === qty ? true : false} onClick={e => {
-                    setQty(pre => pre + 1)
+                  <strong style={{}}>&nbsp;&nbsp; {qty6} &nbsp;&nbsp;</strong>
+                  <button className="btn" disabled={reduxSingleProduct.serves === qty6 ? true : false} onClick={e => {
+                    setQty6(pre => pre + 1)
                   }}>+</button>
                 </div>
             </div>
@@ -271,12 +278,12 @@ const TestProducts = () => {
                 Quantity
                 </div>
                 <div className='quantity-button'>
-                <button className="btn" disabled={qty === 0 ? true : false} onClick={e => {
-                    setQty(pre => pre === 0 ? 1 : pre - 1)
+                <button className="btn" disabled={qty7 === 0 ? true : false} onClick={e => {
+                    setQty7(pre => pre === 0 ? 1 : pre - 1)
                   }}>-</button>
-                  <strong style={{}}>&nbsp;&nbsp; {qty} &nbsp;&nbsp;</strong>
-                  <button className="btn" disabled={reduxSingleProduct.serves === qty ? true : false} onClick={e => {
-                    setQty(pre => pre + 1)
+                  <strong style={{}}>&nbsp;&nbsp; {qty7} &nbsp;&nbsp;</strong>
+                  <button className="btn" disabled={reduxSingleProduct.serves === qty7 ? true : false} onClick={e => {
+                    setQty7(pre => pre + 1)
                   }}>+</button>
                 </div>
             </div>
@@ -309,12 +316,12 @@ const TestProducts = () => {
                 Quantity
                 </div>
                 <div className='quantity-button'>
-                <button className="btn" disabled={qty === 0 ? true : false} onClick={e => {
-                    setQty(pre => pre === 0 ? 1 : pre - 1)
+                <button className="btn" disabled={qty8 === 0 ? true : false} onClick={e => {
+                    setQty8(pre => pre === 0 ? 1 : pre - 1)
                   }}>-</button>
-                  <strong style={{}}>&nbsp;&nbsp; {qty} &nbsp;&nbsp;</strong>
-                  <button className="btn" disabled={reduxSingleProduct.serves === qty ? true : false} onClick={e => {
-                    setQty(pre => pre + 1)
+                  <strong style={{}}>&nbsp;&nbsp; {qty8} &nbsp;&nbsp;</strong>
+                  <button className="btn" disabled={reduxSingleProduct.serves === qty8 ? true : false} onClick={e => {
+                    setQty8(pre => pre + 1)
                   }}>+</button>
                 </div>
             </div>
