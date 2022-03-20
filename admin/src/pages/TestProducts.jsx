@@ -9,7 +9,7 @@ import Laddoo from "../images/Laddoo Pic 2.png"
 import combo from "../images/combo 1.png"
 import time from "../images/time.png"
 import Serves from "../images/Serving.png"
-import Modal from "../components/combo1/combo1"
+
 
 const TestProducts = () => {
     const [showModal, setShowModal] = useState(false);
