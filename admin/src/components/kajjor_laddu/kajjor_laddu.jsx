@@ -2,13 +2,19 @@ import React from "react";
 import "./kajjor_laddu.css";
 import caribbean_tikki from "./Laddoo Pic 2.png";
 
-export default function popup() {
+export default function Popup(setShowModal) {
+  const modalRef1 = useRef();
+  const closeModal = (e) => {
+    if (e.target === modalRef.current) {
+      setShowModal(false);
+    }
+  };
   return (
-    <div className="container">
+    <div className="container" ref={modalRef1} onClick={closeModal}>
       <div className="caribbean_tikki">
         <img src={caribbean_tikki} />
       </div>
-      <div className="cancel">
+      <div className="cancel" onClick={() => setShowModal(false)}>
         <span></span>
         <span></span>
       </div>

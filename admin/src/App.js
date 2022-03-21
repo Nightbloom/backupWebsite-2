@@ -8,7 +8,6 @@ import Footer from "./components/Footer";
 import { Home } from "./components/Home";
 import Payment from "./pages/Payment";
 import TestProducts from "./pages/TestProducts";
-
 import Caribbean_tikki from "./components/caribbean_tikki/caribbean_tikki";
 import Belgium_nutty from "./components/belgium_nutty/belgium_nutty";
 import Black_rice_payassam from "./components/black_rice_payassam/black_rice_payassam";

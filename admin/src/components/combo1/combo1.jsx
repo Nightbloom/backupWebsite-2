@@ -1,9 +1,8 @@
-import React,{ useRef } from "react";
+import React, { useRef } from "react";
 import "./combo1.css";
 import caribbean_tikki from "./combo 1.png";
 
 export default function Popup({ setShowModal }) {
-
   const modalRef = useRef();
   const closeModal = (e) => {
     if (e.target === modalRef.current) {
@@ -11,13 +10,12 @@ export default function Popup({ setShowModal }) {
     }
   };
 
-
   return (
-    <div className="container" onClick={closeModal}>
+    <div className="container" ref={modalRef} onClick={closeModal}>
       <div className="caribbean_tikki">
         <img src={caribbean_tikki} />
       </div>
-      <div className="cancel" onClick={() => setShowModal(false)}> 
+      <div className="cancel" onClick={() => setShowModal(false)}>
         <span></span>
         <span></span>
       </div>
